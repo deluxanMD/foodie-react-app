@@ -19,17 +19,12 @@ jobs:
         with:
           node-version: 18
 
-  install-dependencies:
-    runs-on: ubuntu-latest
-    needs: checkout-and-setup
-
-    steps:
       - name: Install Node modules
-        run: npm i
+        run: npm ci
 
   lint:
     runs-on: ubuntu-latest
-    needs: install-dependencies
+    needs: checkout-and-setup
 
     steps:
       - name: Lint
@@ -37,7 +32,7 @@ jobs:
 
   prettier-check:
     runs-on: ubuntu-latest
-    needs: install-dependencies
+    needs: checkout-and-setup
 
     steps:
       - name: Prettier
@@ -45,7 +40,7 @@ jobs:
 
   jest:
     runs-on: ubuntu-latest
-    needs: install-dependencies
+    needs: checkout-and-setup
 
     steps:
       - name: Jest
@@ -82,7 +77,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: install-dependencies
+    needs: checkout-and-setup
 
     steps:
       - name: Build Project
