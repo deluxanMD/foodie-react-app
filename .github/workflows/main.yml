@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Install Node modules
-        run: npm ci
+        run: npm i
 
   lint:
     runs-on: ubuntu-latest
