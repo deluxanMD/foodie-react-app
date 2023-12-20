@@ -20,7 +20,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "npx eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "prettier:check": "npx prettier --check src",
+    "prettier:fix": "npx prettier --write src",
+    "report": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "coverage": "nyc npm run test -- --coverage --watchAll=false"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0"
   }
 }
