@@ -7,7 +7,7 @@ on:
       - "main"
 
 jobs:
-  checkout-and-setup:
+  install-and-format:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,45 +22,17 @@ jobs:
       - name: Install Node modules
         run: npm ci
 
-  lint:
-    runs-on: ubuntu-latest
-    needs: checkout-and-setup
-
-    steps:
       - name: Lint
-        run: |
-          cd ${{ github.workspace }} &&
-          npm run lint
+        run: npm run lint
 
-  prettier-check:
-    runs-on: ubuntu-latest
-    needs: checkout-and-setup
-
-    steps:
       - name: Prettier
-        run: |
-          cd ${{ github.workspace }} &&
-          npm run prettier:check
+        run: npm run prettier:check
 
-  jest:
-    runs-on: ubuntu-latest
-    needs: checkout-and-setup
-
-    steps:
       - name: Jest
-        run: |
-          cd ${{ github.workspace }} &&
-          npm run test
+        run: npm run test
 
-  code-coverage:
-    runs-on: ubuntu-latest
-    needs: jest
-
-    steps:
       - name: Code Coverage
-        run: |
-          cd ${{ github.workspace }} &&
-          npm run coverage && npm run report
+        run: npm run coverage && npm run report
 
       - uses: codecov/codecov-action@v3
         with:
@@ -69,12 +41,6 @@ jobs:
           name: Upload reports to codecov
           fail_ci_if_error: true
           verbose: true
-
-  upload-codecov:
-    runs-on: ubuntu-latest
-    needs: code-coverage
-
-    steps:
       - run: |
           set -e
           curl -Os https://uploader.codecov.io/latest/linux/codecov
@@ -83,12 +49,5 @@ jobs:
           ./codecov -t ${CODECOV_TOKEN}
           rm codecov
 
-  build:
-    runs-on: ubuntu-latest
-    needs: checkout-and-setup
-
-    steps:
       - name: Build Project
-        run: |
-          cd ${{ github.workspace }} &&
-          npm run build
+        run: npm run build
