@@ -1,5 +1,5 @@
 const Login = () => {
-  return <div>Login</div>;
+  return <div data-testid="Login.Page">Login</div>;
 };
 
 export default Login;

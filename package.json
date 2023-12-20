@@ -26,7 +26,8 @@
     "prettier:check": "npx prettier --check src",
     "prettier:fix": "npx prettier --write src",
     "report": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
-    "coverage": "nyc npm run test -- --coverage --watchAll=false"
+    "coverage": "nyc npm run test -- --coverage --watchAll=false",
+    "test-ct": "playwright test -c playwright-ct.config.ts"
   },
   "eslintConfig": {
     "extends": [
@@ -47,8 +48,12 @@
     ]
   },
   "devDependencies": {
+    "@playwright/experimental-ct-react": "^1.40.1",
+    "@playwright/test": "^1.40.1",
+    "babel-plugin-istanbul": "^6.1.1",
     "eslint": "^8.56.0",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "playwright-test-coverage": "^1.2.12"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
